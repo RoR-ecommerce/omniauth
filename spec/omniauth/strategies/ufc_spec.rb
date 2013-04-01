@@ -34,11 +34,11 @@ describe OmniAuth::Strategies::Ufc do
     end
 
     it 'should have correct authorize url' do
-      subject.options.client_options.authorize_url.should eq('https://launchpad.ufcfit.com/login/oauth/authorize')
+      subject.options.client_options.authorize_url.should eq('https://launchpad.ufcfit.com/login/oauth/auth')
     end
 
     it 'should have correct token url' do
-      subject.options.client_options.token_url.should eq('https://launchpad.ufcfit.com/login/oauth/access_token')
+      subject.options.client_options.token_url.should eq('https://launchpad.ufcfit.com/login/oauth/token')
     end
 
     describe "should be overrideable" do
