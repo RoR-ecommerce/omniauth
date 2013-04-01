@@ -1,0 +1,23 @@
+# coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'omniauth/ufc/version'
+
+Gem::Specification.new do |gem|
+  gem.name          = "omniauth-ufc"
+  gem.version       = Omniauth::Ufc::VERSION
+  gem.authors       = ["Igor Pstyga"]
+  gem.email         = ["igor.pstyga@gmail.com"]
+  gem.description   = %q{OmniAuth strategy for UFCFit.}
+  gem.summary       = %q{OmniAuth strategy for UFCFit.}
+  gem.homepage      = "https://github.com/RoR-ecommerce/ufc-omniauth"
+  gem.license       = "MIT"
+
+  gem.files         = `git ls-files`.split($/)
+  gem.executables   = gem.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
+  gem.require_paths = ["lib"]
+
+  gem.add_development_dependency "bundler", "~> 1.3"
+  gem.add_development_dependency "rake"
+end
