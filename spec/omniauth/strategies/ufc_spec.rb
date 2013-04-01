@@ -34,7 +34,7 @@ describe OmniAuth::Strategies::Ufc do
     end
 
     it 'should have correct authorize url' do
-      subject.options.client_options.authorize_url.should eq('https://launchpad.ufcfit.com/login/oauth/auth')
+      subject.options.client_options.authorize_url.should eq('https://launchpad.ufcfit.com/login/oauth/auth/new')
     end
 
     it 'should have correct token url' do
