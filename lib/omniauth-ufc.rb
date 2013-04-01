@@ -1,2 +1,2 @@
-require "omniauth/ufc/version"
+require "omniauth-ufc/version"
 require "omniauth/strategies/ufc"
