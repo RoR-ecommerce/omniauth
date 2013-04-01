@@ -7,8 +7,8 @@ module OmniAuth
 
       option :client_options, {
         site: 'https://api.ufcfit.com',
-        authorize_url: 'https://launchpad.ufcfit.com/login/oauth/authorize',
-        token_url: 'https://launchpad.ufcfit.com/login/oauth/access_token'
+        authorize_url: 'https://launchpad.ufcfit.com/login/oauth/auth',
+        token_url: 'https://launchpad.ufcfit.com/login/oauth/token'
       }
 
       def authorize_params
