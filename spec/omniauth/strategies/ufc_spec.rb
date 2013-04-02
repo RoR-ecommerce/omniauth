@@ -30,15 +30,15 @@ describe OmniAuth::Strategies::Ufc do
 
   context "client options" do
     it 'should have correct site' do
-      subject.options.client_options.site.should eq("https://api.ufcfit.com")
+      subject.options.client_options.site.should eq("https://launchpad.ufcfit.com")
     end
 
     it 'should have correct authorize url' do
-      subject.options.client_options.authorize_url.should eq('https://launchpad.ufcfit.com/login/oauth/auth/new')
+      subject.options.client_options.authorize_url.should eq('/oauth/auth')
     end
 
     it 'should have correct token url' do
-      subject.options.client_options.token_url.should eq('https://launchpad.ufcfit.com/login/oauth/token')
+      subject.options.client_options.token_url.should eq('/oauth/token')
     end
 
     describe "should be overrideable" do
