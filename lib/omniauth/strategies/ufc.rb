@@ -42,4 +42,4 @@ module OmniAuth
   end
 end
 
-OmniAuth.config.add_camelization 'ufc', 'UFC'
+OmniAuth.config.add_camelization 'ufc', 'Ufc'

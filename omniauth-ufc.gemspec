@@ -5,7 +5,7 @@ require 'omniauth-ufc/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "omniauth-ufc"
-  gem.version       = Omniauth::Ufc::VERSION
+  gem.version       = OmniAuth::Ufc::VERSION
   gem.authors       = ["Igor Pstyga"]
   gem.email         = ["igor.pstyga@gmail.com"]
   gem.description   = %q{OmniAuth strategy for UFCFit.}
