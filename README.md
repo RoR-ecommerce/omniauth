@@ -18,4 +18,24 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Each OmniAuth strategy is a Rack Middleware. That means that you can use
+it the same way that you use any other Rack middleware.
+
+As far as OmniAuth is built for *multi-provider* authentication, it has
+a room to run multiple strategies. For this, the built-in `OmniAuth::Builder`
+class gives an easy way to specify multiple strategies.
+
+```ruby
+use OmniAuth::Builder do
+  provider :ufc, ENV['CLIENT_ID'], ENV['CLIENT_SECRET']
+end
+```
+
+The following example you might put into a Rails initializer at `config/initializers/omniauth.rb`:
+
+```ruby
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :developer if Rails.env.development?
+  provider :ufc, ENV['UFC_CLIENT_ID'], ENV['UFC_CLIENT_SECRET']
+end
+```
