@@ -5,9 +5,11 @@ describe OmniAuth::Strategies::Ufc do
   let(:parsed_response) { stub('ParsedResponse') }
   let(:response) { stub('Response', parsed: parsed_response) }
 
-  let(:enterprise_site)          { 'https://some.other.site.com/api/v3' }
-  let(:enterprise_authorize_url) { 'https://some.other.site.com/login/oauth/authorize' }
-  let(:enterprise_token_url)     { 'https://some.other.site.com/login/oauth/access_token' }
+  let(:enterprise_site)             { 'https://some.other.site.com/api/v3' }
+  let(:enterprise_authorize_url)    { 'https://some.other.site.com/login/oauth/authorize' }
+  let(:enterprise_token_url)        { 'https://some.other.site.com/login/oauth/access_token' }
+  let(:enterprise_token_header)     { 'header' }
+  let(:enterprise_token_param_name) { 'enterprise_token' }
   let(:enterprise) do
     OmniAuth::Strategies::Ufc.new('UFC_KEY', 'UFC_SECRET',
       {
@@ -15,6 +17,10 @@ describe OmniAuth::Strategies::Ufc do
           site: enterprise_site,
           authorize_url: enterprise_authorize_url,
           token_url: enterprise_token_url
+        },
+        access_token_options: {
+          header_format: enterprise_token_header,
+          param_name: enterprise_token_param_name
         }
       }
     )
@@ -53,6 +59,16 @@ describe OmniAuth::Strategies::Ufc do
       it "for token url" do
         enterprise.options.client_options.token_url.should eq(enterprise_token_url)
       end
+    end
+  end
+
+  context "access token options" do
+    it { expect(subject.options.access_token_options.header_format).to eq('OAuth %s') }
+    it { expect(subject.options.access_token_options.param_name).to eq('access_token') }
+
+    describe "should be overrideable" do
+      it { expect(enterprise.options.access_token_options.header_format).to eq(enterprise_token_header) }
+      it { expect(enterprise.options.access_token_options.param_name).to eq(enterprise_token_param_name) }
     end
   end
 
