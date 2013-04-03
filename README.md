@@ -39,3 +39,19 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :ufc, ENV['UFC_CLIENT_ID'], ENV['UFC_CLIENT_SECRET']
 end
 ```
+
+To override default options, you can pass it along with `OmniAuth::Builder`.
+It can be helpful for different App environments, like development or staging:
+
+```ruby
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :ufc, ENV['UFC_CLIENT_ID'], ENV['UFC_CLIENT_SECRET'],
+    {
+      client_options: {
+        site: "http://localhost:3001",
+        authorize_url: '/oauth/auth',
+        token_url: '/oauth/token'
+      }
+    }
+end
+```

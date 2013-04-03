@@ -19,7 +19,12 @@ end
 use Rack::Session::Cookie
 
 use OmniAuth::Builder do
-  provider :ufc, ENV['CLIENT_ID'], ENV['CLIENT_SECRET']
+  provider :ufc, ENV['CLIENT_ID'], ENV['CLIENT_SECRET'],
+    { client_options: {
+        site: "http://localhost:3001",
+        authorize_url: '/oauth/auth',
+        token_url: '/oauth/token' }
+    }
 end
 
 run App.new

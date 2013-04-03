@@ -3,7 +3,6 @@ require 'omniauth-oauth2'
 module OmniAuth
   module Strategies
     class Ufc < OmniAuth::Strategies::OAuth2
-      # option :name, "https://launchpad.ufcfit.com"
 
       option :client_options, {
         site: 'https://launchpad.ufcfit.com',
