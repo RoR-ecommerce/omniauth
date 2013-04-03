@@ -10,10 +10,6 @@ module OmniAuth
         token_url: '/oauth/token'
       }
 
-      def request_phase
-        super
-      end
-
       uid { raw_info['id'].to_s }
 
       info do
@@ -24,10 +20,9 @@ module OmniAuth
         { raw_info: raw_info }
       end
 
-      # TODO get user info from launchpad/API.
       def raw_info
         access_token.options[:mode] = :query
-        @raw_info ||= access_token.get('user').parsed
+        @raw_info ||= access_token.get('/oauth/user').parsed
       end
     end
   end
