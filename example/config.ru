@@ -8,15 +8,17 @@ class App < Sinatra::Base
   end
 
   get '/auth/:provider/callback' do
-    MultiJson.encode(request.env)
+    content_type 'application/json'
+    MultiJson.encode(request.env['omniauth.auth']) rescue "No Data"
   end
 
   get '/auth/failure' do
-    MultiJson.encode(request.env)
+    content_type 'text/html'
+    MultiJson.encode(request.env['omniauth.auth']) rescue "No Data"
   end
 end
 
-use Rack::Session::Cookie
+use Rack::Session::Cookie, secret: ENV['RACK_COOKIE_SECRET']
 
 use OmniAuth::Builder do
   provider :ufc, ENV['CLIENT_ID'], ENV['CLIENT_SECRET'],
