@@ -3,6 +3,7 @@ require 'omniauth-oauth2'
 module OmniAuth
   module Strategies
     class Ufc < OmniAuth::Strategies::OAuth2
+      option :name, "ufc"
 
       option :client_options, {
         site: 'https://launchpad.ufcfit.com',
@@ -18,7 +19,10 @@ module OmniAuth
       uid { raw_info['id'].to_s }
 
       info do
-        { email: raw_info['email'] }
+        {
+          email: raw_info['email'],
+          name: raw_info['email']
+        }
       end
 
       extra do
