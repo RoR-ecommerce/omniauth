@@ -16,7 +16,7 @@ module OmniAuth
         param_name: 'access_token'
       }
 
-      uid { raw_info['id'].to_s }
+      uid { raw_info['uid'].to_s }
 
       info do
         {
