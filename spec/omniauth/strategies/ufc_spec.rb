@@ -78,4 +78,26 @@ describe OmniAuth::Strategies::Ufc do
       subject.raw_info.should eq(parsed_response)
     end
   end
+
+  context "#info" do
+    it "should return email from raw_info if available" do
+      subject.stub!(:raw_info).and_return({'email' => 'you@example.com'})
+      expect(subject.info[:email]).to eq('you@example.com')
+    end
+
+    it "should return nil if there is no raw_info and email access is not allowed" do
+      subject.stub!(:raw_info).and_return({})
+      expect(subject.info[:email]).to be_nil
+    end
+
+    it "should return full_name from raw_info if available" do
+      subject.stub!(:raw_info).and_return({'full_name' => 'John Doe'})
+      expect(subject.info[:name]).to eq('John Doe')
+    end
+
+    it "should return nil if there is no raw_info and full_name access is not allowed" do
+      subject.stub!(:raw_info).and_return({})
+      expect(subject.info[:name]).to be_nil
+    end
+  end
 end
