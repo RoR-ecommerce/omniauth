@@ -90,14 +90,24 @@ describe OmniAuth::Strategies::Ufc do
       expect(subject.info[:email]).to be_nil
     end
 
-    it "should return full_name from raw_info if available" do
-      subject.stub!(:raw_info).and_return({'full_name' => 'John Doe'})
-      expect(subject.info[:name]).to eq('John Doe')
+    it "should return first_name from raw_info if available" do
+      subject.stub!(:raw_info).and_return({'first_name' => 'John'})
+      expect(subject.info[:first_name]).to eq('John')
     end
 
-    it "should return nil if there is no raw_info and full_name access is not allowed" do
+    it "should return last_name from raw_info if available" do
+      subject.stub!(:raw_info).and_return({'last_name' => 'Doe'})
+      expect(subject.info[:last_name]).to eq('Doe')
+    end
+
+    it "should return nil if there is no raw_info and first_name access is not allowed" do
       subject.stub!(:raw_info).and_return({})
-      expect(subject.info[:name]).to be_nil
+      expect(subject.info[:first_name]).to be_nil
+    end
+
+    it "should return nil if there is no raw_info and last_name access is not allowed" do
+      subject.stub!(:raw_info).and_return({})
+      expect(subject.info[:last_name]).to be_nil
     end
   end
 end
