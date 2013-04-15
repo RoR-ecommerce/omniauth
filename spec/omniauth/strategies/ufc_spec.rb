@@ -80,34 +80,28 @@ describe OmniAuth::Strategies::Ufc do
   end
 
   context "#info" do
-    it "should return email from raw_info if available" do
-      subject.stub!(:raw_info).and_return({'email' => 'you@example.com'})
-      expect(subject.info[:email]).to eq('you@example.com')
+    context "when attributes is available" do
+      before do
+        subject.stub!(:raw_info).and_return({
+          'email' => 'you@example.com',
+          'first_name' => 'John',
+          'last_name' => 'Doe'
+        })
+      end
+
+      it { expect(subject.info[:email]).to eq('you@example.com') }
+      it { expect(subject.info[:first_name]).to eq('John') }
+      it { expect(subject.info[:last_name]).to eq('Doe') }
     end
 
-    it "should return nil if there is no raw_info and email access is not allowed" do
-      subject.stub!(:raw_info).and_return({})
-      expect(subject.info[:email]).to be_nil
-    end
+   context "when attributes is not allowed" do
+      before do
+        subject.stub!(:raw_info).and_return({})
+      end
 
-    it "should return first_name from raw_info if available" do
-      subject.stub!(:raw_info).and_return({'first_name' => 'John'})
-      expect(subject.info[:first_name]).to eq('John')
-    end
-
-    it "should return last_name from raw_info if available" do
-      subject.stub!(:raw_info).and_return({'last_name' => 'Doe'})
-      expect(subject.info[:last_name]).to eq('Doe')
-    end
-
-    it "should return nil if there is no raw_info and first_name access is not allowed" do
-      subject.stub!(:raw_info).and_return({})
-      expect(subject.info[:first_name]).to be_nil
-    end
-
-    it "should return nil if there is no raw_info and last_name access is not allowed" do
-      subject.stub!(:raw_info).and_return({})
-      expect(subject.info[:last_name]).to be_nil
+      it { expect(subject.info[:email]).to be_nil }
+      it { expect(subject.info[:first_name]).to be_nil }
+      it { expect(subject.info[:first_name]).to be_nil }
     end
   end
 end
