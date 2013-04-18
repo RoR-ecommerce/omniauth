@@ -85,13 +85,15 @@ describe OmniAuth::Strategies::Ufc do
         subject.stub!(:raw_info).and_return({
           'email' => 'you@example.com',
           'first_name' => 'John',
-          'last_name' => 'Doe'
+          'last_name' => 'Doe',
+          'country' => {'alpha3' => 'USA'}
         })
       end
 
       it { expect(subject.info[:email]).to eq('you@example.com') }
       it { expect(subject.info[:first_name]).to eq('John') }
       it { expect(subject.info[:last_name]).to eq('Doe') }
+      it { expect(subject.info[:country]).to eq({'alpha3' => 'USA'}) }
     end
 
    context "when attributes is not allowed" do
@@ -102,6 +104,7 @@ describe OmniAuth::Strategies::Ufc do
       it { expect(subject.info[:email]).to be_nil }
       it { expect(subject.info[:first_name]).to be_nil }
       it { expect(subject.info[:first_name]).to be_nil }
+      it { expect(subject.info[:country]).to be_nil }
     end
   end
 end
